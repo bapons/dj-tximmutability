@@ -46,5 +46,5 @@ jobs:
         pip install -r requirements_test.txt
         pip install "Django${{ matrix.django }}"
         pip install -e .
-    #- name: Run tests
-    #  run: python runtests.py
+    - name: Run tests
+      run: python runtests.py
