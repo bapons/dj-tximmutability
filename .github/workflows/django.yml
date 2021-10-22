@@ -32,6 +32,8 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Lint Blacken
+      uses: piotrpawlaczek/python-blacken@release/stable
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
