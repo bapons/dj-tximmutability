@@ -1,30 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import codecs
 import os
 import re
 import sys
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
-
-CURRENT_PYTHON = sys.version_info[:2]
+from setuptools import find_packages, setup
 
 
-def get_version(*file_paths):
-    """Retrieves the version from tximmutability/__init__.py"""
-    filename = os.path.join(os.path.dirname(__file__), *file_paths)
-    version_file = open(filename).read()
-    version_match = re.search(
-        r"^__version__ = ['\"]([^'\"]*)['\"]", version_file, re.M
-    )
-    if version_match:
-        return version_match.group(1)
-    raise RuntimeError('Unable to find version string.')
-
-
-version = get_version("tximmutability", "__init__.py")
+def get_metadata(package, field):
+    """
+    Return package data as listed in `__{field}__` in `init.py`.
+    """
+    init_py = codecs.open(os.path.join(package, '__init__.py'), encoding='utf-8').read()
+    match = re.search("^__{}__ = ['\"]([^'\"]+)['\"]".format(field), init_py, re.MULTILINE)
+    if match:
+        return match.group(1)
+    raise RuntimeError('Unable to find {} string.'.format(field))
 
 if sys.argv[-1] == 'publish':
     try:
@@ -37,6 +29,10 @@ if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist upload')
     os.system('python setup.py bdist_wheel upload')
     sys.exit()
+
+version = get_metadata("tximmutability", "version")
+author = get_metadata("tximmutability", "author")
+email = get_metadata("tximmutability", "email")
 
 if sys.argv[-1] == 'tag':
     print("Tagging the version on git:")
@@ -54,17 +50,16 @@ setup(
     name='dj-tximmutability',
     version=version,
     description='Mutability rules for Django models.',
-    long_description=readme + '\n\n' + history,
-    author='Marija Milicevic',
-    author_email='marija.milicevic@txerpa.com',
-    url='https://github.com/marija_milicevic/dj-tximmutability',
-    packages=[
-        'tximmutability',
-    ],
+    long_description=readme,
+    long_description_content_type='text/markdown',
+    author=author,
+    author_email=email,
+    url='https://github.com/txerpa/dj-tximmutability',
+    packages=find_packages(exclude=['tests*']),
     include_package_data=True,
-    install_requires=["django>=2.2,<=3", "django-model-utils==4.1.1"],
+    install_requires=["Django>=2.2,<=3", "django-model-utils==4.1.1"],
     python_requires=">=3.6",
-    license="BSD",
+    license='MIT License',
     zip_safe=False,
     keywords=['django', 'tximmutability', 'immutability', 'mutability'],
     classifiers=[
