@@ -77,7 +77,7 @@ pyenv global 3.9.2 3.8.8 3.7.7 3.6.13 3.5.3
 * Run tests
 ```bash
 workon <YOURVIRTUALENV>
-(myenv) $ pip install -r requirements_test.txt
+(myenv) $ pip install -r requirements/requirements_test.txt
 (myenv) $ tox
 ```
 
