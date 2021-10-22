@@ -44,12 +44,11 @@ if sys.argv[-1] == 'tag':
     os.system("git push --tags")
     sys.exit()
 
-with open('README.rst', 'r') as f:
+with open('README.md', 'r') as f:
     readme = f.read()
-# readme = open('README.rst').read()
+
 with open('HISTORY.rst', 'r') as f:
     history = f.read().replace('.. :changelog:', '')
-# history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
     name='dj-tximmutability',
