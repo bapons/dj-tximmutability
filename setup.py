@@ -12,11 +12,16 @@ def get_metadata(package, field):
     """
     Return package data as listed in `__{field}__` in `init.py`.
     """
-    init_py = codecs.open(os.path.join(package, '__init__.py'), encoding='utf-8').read()
-    match = re.search("^__{}__ = ['\"]([^'\"]+)['\"]".format(field), init_py, re.MULTILINE)
+    init_py = codecs.open(
+        os.path.join(package, '__init__.py'), encoding='utf-8'
+    ).read()
+    match = re.search(
+        "^__{}__ = ['\"]([^'\"]+)['\"]".format(field), init_py, re.MULTILINE
+    )
     if match:
         return match.group(1)
     raise RuntimeError('Unable to find {} string.'.format(field))
+
 
 if sys.argv[-1] == 'publish':
     try:
