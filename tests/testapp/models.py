@@ -2,6 +2,7 @@
 from __future__ import absolute_import, unicode_literals
 
 from django.db import models
+from model_utils import FieldTracker
 
 from tests.testapp.constants import ModelState
 from tximmutability.models import MutableModel
