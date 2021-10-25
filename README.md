@@ -3,6 +3,7 @@
 ---
 
 ![Python package](https://github.com/bapons/dj-tximmutability/actions/workflows/django.yml/badge.svg)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/bapons/dj-tximmutability/master.svg)](https://results.pre-commit.ci/latest/github/bapons/dj-tximmutability/master)
 
 <!--[![pypi](https://img.shields.io/pypi/v/dj-tximmutability.svg)](https://pypi.python.org/pypi/dj-tximmutability/)-->
 <!--[![Python versions](https://img.shields.io/pypi/pyversions/dj-tximmutability.svg)](https://pypi.org/project/dj-tximmutability/)-->
